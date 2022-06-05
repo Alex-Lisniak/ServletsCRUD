@@ -17,7 +17,8 @@ public class JDBCTesting {
             System.out.println(dao.findAll(connection).toString());
             dao.save(connection , new Student(543L , "name" , "surname" , 15));
             System.out.println(dao.findAll(connection).toString());
-            dao.deleteById(connection ,543L );
+            dao.deleteById(connection ,5L );
+
             System.out.println(dao.findAll(connection).toString());
             //System.out.println(dao.findAll(dao.getDataSource().getConnection()).toString());
 

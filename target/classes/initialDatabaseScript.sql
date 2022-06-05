@@ -11,3 +11,4 @@ INSERT INTO students (student_name, student_surname, student_age) values ('Oleks
 INSERT INTO students (student_name, student_surname, student_age) values ('OleksandrL' ,'surname',20);
 INSERT INTO students (student_name, student_surname, student_age) values ('SyrymKh' ,'surname',20);
 INSERT INTO students (student_name, student_surname, student_age) values ('OlehZ' ,'surname',20);
+
