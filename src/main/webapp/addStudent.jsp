@@ -12,7 +12,14 @@
             <%@include file="vendor/navbar.jsp"%>
         </div>
     </div>
-    <div class=""></div>
+    <h1 class="text-primary text-center">ADD STUDENT</h1>
+    <div class="row mt-5">
+
+        <div class="form-group">
+            <label for="">NAME OF STUDENT</label>
+            <input type="text" class="form-control">
+        </div>
+    </div>
 </div>
 </body>
 </html>
