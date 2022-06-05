@@ -10,7 +10,8 @@ public class CustomDataSource {
     private  String username;
     private  String password;
 
-    public CustomDataSource(){
+    public CustomDataSource() throws ClassNotFoundException {
+        Class.forName("org.postgresql.Driver");
         this.jdbcUrl = "jdbc:postgresql://localhost:5432/postgres";
         this.username = "postgres";
         this.password = "postgres";

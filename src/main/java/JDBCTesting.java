@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 
 public class JDBCTesting {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException {
         DaoImpl dao = new DaoImpl(new CustomDataSource());
         try {
             Connection connection = dao.getDataSource().getConnection();

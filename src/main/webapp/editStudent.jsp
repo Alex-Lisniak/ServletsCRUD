@@ -1,3 +1,4 @@
+<%@ page import="model.Student" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
     <head>
@@ -39,25 +40,33 @@
         }
     %>
 
-    <h1 class="text-primary text-center">ADD STUDENT</h1>
+    <h1 class="text-primary text-center">EDIT STUDENT</h1>
     <div class="row mt-5">
-        <form action="/addStudent" method="post">
+        <form action="/editStudent" method="post">
+            <%
+                Student student = (Student)request.getAttribute("student");
+                if (student!=null) {
+            %>
+            <input type="hidden" value="<%=student.getId()%>" name="id">
         <div class="form-group">
             <label for="">NAME OF STUDENT</label>
-            <input type="text" class="form-control" name="name">
+            <input type="text" class="form-control" name="name"  value="<%=student.getName()%>">
         </div>
         <div class="form-group">
             <label for="">SURNAME OF STUDENT</label>
-            <input type="text" class="form-control" name="surname">
+            <input type="text" class="form-control" name="surname" value="<%=student.getSurname()%>">
         </div>
         <div class="form-group">
             <label for="">AGE OF STUDENT</label>
-            <input type="number" class="form-control" name="age">
+            <input type="number" class="form-control" name="age" value="<%=student.getAge()%>">
         </div>
             <div class="form-group">
                 <button class="btn btn-primary btn-sm">SAVE</button>
             </div>
         </form>
+        <%
+            }
+        %>
     </div>
 </div>
 </body>

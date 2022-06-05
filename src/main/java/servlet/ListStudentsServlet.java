@@ -2,18 +2,18 @@ package servlet;
 
 import dao.implementation.DaoImpl;
 import dao.source.CustomDataSource;
+import exceptions.StudentNotFoundException;
 import model.Student;
-import service.StudentService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
-//author Syrym Khakimzhan servlets/UI
-@WebServlet(value = "/addStudent")
-public class AddStudentServlet extends HttpServlet {
+@WebServlet(name = "ListStudents", value = "/listStudents")
+public class ListStudentsServlet extends HttpServlet {
     DaoImpl dao;
     public void init() {
         CustomDataSource customDataSource = null;
@@ -26,20 +26,20 @@ public class AddStudentServlet extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/addStudent.jsp").forward(request,response);
+        try {
+            List<Student> studentList = dao.findAll(dao.getDataSource().getConnection());
+            request.setAttribute("students", studentList);
+            request.getRequestDispatcher("students.jsp").forward(request, response);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (StudentNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            String name = request.getParameter("name");
-            String surname = request.getParameter("surname");
-            int age = Integer.parseInt(request.getParameter("age"));
-        try {
-            dao.save(dao.getDataSource().getConnection(), new Student(name, surname,age));
-                response.sendRedirect("/addStudent?success");
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
-;}
+}

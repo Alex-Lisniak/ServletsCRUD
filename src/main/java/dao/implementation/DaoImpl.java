@@ -47,6 +47,7 @@ public class DaoImpl {
             pStatement.setString(1, student.getName());
             pStatement.setString(2, student.getSurname());
             pStatement.setInt(3,student.getAge());
+            pStatement.setLong(4, student.getId());
             if(pStatement.execute()) return true;
         }
         return false;

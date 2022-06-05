@@ -2,18 +2,16 @@ package servlet;
 
 import dao.implementation.DaoImpl;
 import dao.source.CustomDataSource;
+import exceptions.StudentNotFoundException;
 import model.Student;
-import service.StudentService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.sql.SQLException;
 
-//author Syrym Khakimzhan servlets/UI
-@WebServlet(value = "/addStudent")
-public class AddStudentServlet extends HttpServlet {
+@WebServlet(name = "DetailsStudentServlet", value = "/detailsStudent")
+public class DetailsStudentServlet extends HttpServlet {
     DaoImpl dao;
     public void init() {
         CustomDataSource customDataSource = null;
@@ -26,20 +24,26 @@ public class AddStudentServlet extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/addStudent.jsp").forward(request,response);
+        Long id = 0L;
+        try {
+            id = Long.parseLong(request.getParameter("id"));
+            Student student = dao.findById(dao.getDataSource().getConnection(),id);
+            if (student != null) {
+                request.setAttribute("student", student);
+                request.getRequestDispatcher("detailsStudent.jsp").forward(request,response);
+            }
+        }
+        catch (Exception e) {
+            try {
+                throw new StudentNotFoundException();
+            } catch (StudentNotFoundException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            String name = request.getParameter("name");
-            String surname = request.getParameter("surname");
-            int age = Integer.parseInt(request.getParameter("age"));
-        try {
-            dao.save(dao.getDataSource().getConnection(), new Student(name, surname,age));
-                response.sendRedirect("/addStudent?success");
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
-;}
+}

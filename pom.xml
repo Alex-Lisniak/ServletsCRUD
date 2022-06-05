@@ -28,21 +28,24 @@
     </dependency>
 
       <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
-      <dependency>
-          <groupId>org.postgresql</groupId>
-          <artifactId>postgresql</artifactId>
-          <version>42.3.6</version>
-      </dependency>
-
+<!--      <dependency>-->
+<!--          <groupId>org.postgresql</groupId>-->
+<!--          <artifactId>postgresql</artifactId>-->
+<!--          <version>42.3.6</version>-->
+<!--      </dependency>-->
+    <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.3.3</version>
+    </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
       <version>4.0.1</version>
       <scope>provided</scope>
     </dependency>
-
   </dependencies>
-
   <build>
     <finalName>webApp</finalName>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
