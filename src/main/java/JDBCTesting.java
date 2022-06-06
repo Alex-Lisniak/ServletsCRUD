@@ -10,14 +10,17 @@ import java.sql.SQLException;
 
 public class JDBCTesting {
     public static void main(String[] args) throws ClassNotFoundException {
-        DaoImpl dao = new DaoImpl(new CustomDataSource());
+        DaoImpl dao = new DaoImpl(new CustomDataSource(
+                "jdbc:postgresql://postgres.cugbglkoed9l.us-east-1.rds.amazonaws.com:5432/postgres"
+                , "postgres"
+                , "postgres"));
         try {
             Connection connection = dao.getDataSource().getConnection();
             System.out.println(dao.findById(connection, 1L));
             System.out.println(dao.findAll(connection).toString());
-            dao.save(connection , new Student(543L , "name" , "surname" , 15));
+            dao.save(connection , new Student(543L , "nameTest" , "surname" , 15));
             System.out.println(dao.findAll(connection).toString());
-            dao.deleteById(connection ,5L );
+            //dao.deleteById(connection ,5L );
 
             System.out.println(dao.findAll(connection).toString());
 
